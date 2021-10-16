@@ -20,6 +20,7 @@ const app = express();
 
 app.use(requestLogger); // логгер запросов - до лимитера и обработчика роутов
 app.use(limiter);
+app.use(cors);
 app.use(cookieParser()); // => токен в req.cookies.token
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -27,7 +28,6 @@ app.use(helmet()); // заголовки безопасности - проста
 
 mongoose.connect(LOCAL_DB); // версия 6 => убрал объект опций
 
-app.use(cors);
 app.use(router);
 app.use(errorLogger); // логгер ошибок - после роутов, до обработчиков ошибок
 
